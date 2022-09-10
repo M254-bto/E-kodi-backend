@@ -77,7 +77,6 @@ def appartments(request):
 
 
 @api_view(['GET'])
-
 def appartments_by_landlord(request):
     user = request.user
     app = AppartmentsSerializer(Appartments.objects.filter(landlord=user), many=True).data

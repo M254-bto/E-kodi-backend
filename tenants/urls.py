@@ -9,6 +9,7 @@ urlpatterns = [
     path('<int:tenant_id>/update/', update_tenant, name='update_tenant'),
     path('<int:tenant_id>/delete/', delete_tenant, name='delete_tenant'),
     path('app/<int:appartment_id>/', tenant_by_appartment, name='tenant_by_appartment'),
+    # path('rent/<int:tenant_id>/', mpesa_payment, name='mpesa_payment'),
 
 ]
 

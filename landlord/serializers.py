@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class LandlordSerializer(ModelSerializer):
     class Meta:
         model = Landlord
-        fields = ['username', 'first_name', 'last_name','contact', 'email', 'password']
+        fields = ['username', 'first_name', 'last_name','contact', 'email']
 
 
 class ProfileSerializer(ModelSerializer):

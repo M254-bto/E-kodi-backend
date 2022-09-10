@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from landlord.models import Appartments
 
 class Tenant(User,models.Model):
-    appartment = models.ForeignKey(Appartments, on_delete=models.CASCADE, null=True)
+    appartment = models.ForeignKey(Appartments, on_delete=models.CASCADE, null=True, related_name='appartment')
     contact = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
