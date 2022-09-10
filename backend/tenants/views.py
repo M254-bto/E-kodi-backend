@@ -7,7 +7,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import TenantSerializer
 from .models import Tenant
 from landlord.models import Appartments
-
+from .mpesa import MpesaAccessToken, LipanaMpesaPpassword
+import requests
 
 
 
@@ -77,3 +78,35 @@ def tenant_rent(request, tenant_id):
     rent = Tenant.objects.get(id=tenant_id).appartment.unit_price
     return Response(rent, status=status.HTTP_200_OK) 
 
+
+
+#mpesa payment#
+@api_view(['POST'])
+def mpesa_payment(request, tenant_id):
+    tenant = Tenant.objects.get(id=tenant_id)
+    # phone_number = tenant.phone_number
+    # amount = tenant.appartment.unit_price
+    access_token = MpesaAccessToken.validated_mpesa_access_token
+    api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+    headers = {"Authorization": "Bearer %s" % access_token}
+    request = {
+        # "BusinessShortCode": LipanaMpesaPpassword.Business_short_code,
+        # "Password": LipanaMpesaPpassword.decode_password,
+        # "Timestamp": LipanaMpesaPpassword.lipa_time,
+        # # "TransactionType": "CustomerPayBillOnline",
+        # "Amount": 1,
+        # # "PartyA": 254798159691,
+        # # "PartyB": LipanaMpesaPpassword.Business_short_code,
+        # "PhoneNumber": 254798159691,
+        # "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+        # "AccountReference": f"{tenant}",
+        # "TransactionDesc": "Testing stk push",
+        "Command ID": "CustomerPayBillOnline",
+        "Amount":1,
+        "Msisdn": 254798159691,
+        "BillRefNumber": 123456,
+        "ShortCode":522522
+ }
+
+    response = requests.post(api_url, json=request, headers=headers)
+    return Response(response.json(), status=status.HTTP_200_OK)

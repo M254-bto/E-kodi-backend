@@ -42,8 +42,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'landlord',
     'tenants',
-    
-]
+    ]
+
+
+#mpesa config
+
+# MPESA_CONFIG = {
+#     # 'CONSUMER_KEY': '01au7vJAPlbbQupYFtOUr1dKOLZBorl6', 'CONSUMER_SECRET': 'SobIDHttqJiUZDg1', ‘HOST_NAME’: ‘<Your hostname e.g https://myhostname>’, ‘PASS_KEY’: ‘<Your pass key from daraja>’, ‘SAFARICOM_API’: ‘https://sandbox.safaricom.co.ke’, ‘SHORT_CODE’: ‘174379’
+
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
